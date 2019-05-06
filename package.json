@@ -1,0 +1,21 @@
+{
+  "name": "aws-billing-alert",
+  "version": "1.0.1",
+  "main": "index.js",
+  "author": "kamataryo <mugil.cephalus+github.com@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "aws-sdk": "^2.449.0"
+  },
+  "peerDependencies": {
+    "aws-sdk": "^2"
+  },
+  "scripts": {
+    "deploy": "bin/deploy.sh",
+    "start": "node -e \"require('./').handler()\""
+  },
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}
