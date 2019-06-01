@@ -16,6 +16,6 @@
     "start": "node -e \"require('./').handler()\""
   },
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.19.0"
   }
 }
