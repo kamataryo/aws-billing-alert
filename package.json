@@ -6,14 +6,14 @@
   "license": "MIT",
   "private": false,
   "devDependencies": {
-    "aws-sdk": "^2.449.0"
+    "aws-sdk": "^2.449.0",
+    "serverless": "^1.44.1"
   },
   "peerDependencies": {
     "aws-sdk": "^2"
   },
   "scripts": {
-    "deploy": "bin/deploy.sh",
-    "start": "node -e \"require('./').handler()\""
+    "deploy": "bin/deploy.sh"
   },
   "dependencies": {
     "axios": "^0.19.0"

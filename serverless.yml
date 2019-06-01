@@ -1,0 +1,42 @@
+service: aws-biling-alert
+
+frameworkVersion: '>=1.44.1 <2.0.0'
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  region: us-east-1
+  stage: v1
+  environment:
+    SLACK_INCOMMING_WEBHOOK_URL: ${env:SLACK_INCOMMING_WEBHOOK_URL}
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - cloudwatch:GetMetricStatistics
+      Resource:
+        - '*'
+
+package:
+  exclude:
+    - .circleci/**
+    - .git/**
+    - bin/**
+    - test/**
+    - docs/**
+    - .*
+    - package-lock.json
+    - yarn.lock
+    - package.json
+    - README.md
+
+functions:
+  daily:
+    handler: src/daily.handler
+    events:
+      - schedule: cron(0 0 4 1/1 * ? *)
+
+  monthly:
+    handler: src/monthly.handler
+    events:
+      - schedule: cron(0 0 5 1 1/1 ? *)
