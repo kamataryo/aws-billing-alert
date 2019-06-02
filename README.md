@@ -3,9 +3,10 @@
 - Specify thresholds for AWS cost and throw alert to a certain Slack channel
 - Throw monthly cost report to a certain Slack Channel
 
-## Prereqite
+## Prereqisite
 
-- Enable `Cost Explorer` for your AWS Account
+- Enable `Cost Explorer` for the targeted AWS account
+- (recommended) install `direnv` to inject environmental variables
 
 ## Deploy
 
