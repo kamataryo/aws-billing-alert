@@ -13,7 +13,7 @@
 ```shell
 $ git clone git@github.com:kamataryo/aws-billing-alert.git
 $ cd aws-billing-alert
-$ yarn
+$ yarn # or npm install
 $ cp .envrc.sample .envrc
 $ vi .envrc
 $ npm run deploy
