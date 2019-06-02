@@ -50,6 +50,7 @@ package:
     - yarn.lock
     - package.json
     - README.md
+    - socials/**
 
 functions:
   daily:
