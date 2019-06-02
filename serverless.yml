@@ -21,7 +21,7 @@ provider:
   iamRoleStatements:
     - Effect: Allow
       Action:
-        - cloudwatch:GetMetricStatistics
+        - cloudwatch:GetMetricData
       Resource:
         - '*'
 
