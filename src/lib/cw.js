@@ -1,3 +1,5 @@
+const AWS = require('aws-sdk')
+
 const cwParam = (startTime, endTime) => {
   return {
     StartTime: startTime,
@@ -38,5 +40,6 @@ module.exports = () => {
 
   const start = new Date(year, month - 1, 1, 0, 0, 0)
   const end = new Date(year, month, 1, 0, 0, 0)
-  const result = await CW.getMetricData(cwParam(start, end)).promise()
+
+  return CW.getMetricData(cwParam(start, end)).promise()
 }

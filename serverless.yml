@@ -8,7 +8,15 @@ provider:
   region: us-east-1
   stage: v1
   environment:
+    # required
     SLACK_INCOMMING_WEBHOOK_URL: ${env:SLACK_INCOMMING_WEBHOOK_URL}
+    # options
+    COST_REPORT_THREASHOLDS: ${env:COST_REPORT_THREASHOLDS, self:custom.defaultThreasholds}
+    MESSAGE_FOR_EXCESSIVE_USAGE: ${env:MESSAGE_FOR_EXCESSIVE_USAGE, self:custom.defaultMessageForExcessiveUsage}
+    MESSAGE_FOR_MONTHLY_REPORT: ${env:MESSAGE_FOR_MONTHLY_REPORT, self:custom.defaultMessageForMonthlyReport}
+    SLACK_CHANNEL: ${env:SLACK_CHANNEL, self:custom.defaultSlackChannel}
+    SLACK_USERNAME: ${env:SLACK_USERNAME, self:custom.defaultSlackUsername}
+    SLACK_EMOJI: ${env:SLACK_EMOJI, self:custom.defaultSlackEmoji}
 
   iamRoleStatements:
     - Effect: Allow
@@ -16,6 +24,19 @@ provider:
         - cloudwatch:GetMetricStatistics
       Resource:
         - '*'
+
+custom:
+  defaultThreasholds:
+    Fn::Join:
+      - ','
+      - - 5
+        - 300
+        - 1000
+  defaultMessageForExcessiveUsage: '<!channel> The AWS usage fee for this month has exceeded over %s USD.'
+  defaultMessageForMonthlyReport: '<!channel> The AWS usage fee for last month is %s USD.'
+  defaultSlackChannel: '#general'
+  defaultSlackUsername: 'AWS Billing Bot'
+  defaultSlackEmoji: ':ghost:'
 
 package:
   exclude:
@@ -34,9 +55,9 @@ functions:
   daily:
     handler: src/daily.handler
     events:
-      - schedule: cron(0 0 4 1/1 * ? *)
+      - schedule: cron(0 4 * * ? *)
 
   monthly:
     handler: src/monthly.handler
     events:
-      - schedule: cron(0 0 5 1 1/1 ? *)
+      - schedule: cron(0 4 1 * ? *)

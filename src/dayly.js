@@ -1,18 +1,8 @@
-const AWS = require('aws-sdk')
+const { format } = require('util')
+const hasExcessed = require('./lib/has-exceeded')
 const cw = require('./lib/cw')
 const slack = require('./lib/slack')
-
-const { COST_REPORT_THREASHOLDS } = process.env
-const THREASHOLDS = COST_REPORT_THREASHOLDS.split(',').map(str => parseInt(str))
-
-const hasExcessed = (cost1, cost0) => {
-  for (let threshold of THREASHOLDS) {
-    if (cost1 >= threshold && cost0 < threshold) {
-      return { excessed: true, threshold }
-    }
-  }
-  return { excessed: false }
-}
+const { MESSAGE_FOR_EXCESSIVE_USAGE } = process.env
 
 module.exports.handler = async () => {
   const result = await cw()
@@ -21,6 +11,8 @@ module.exports.handler = async () => {
   ).Values
   const { excessed, threshold } = hasExcessed(cost1, cost0)
   if (excessed) {
-    slack(`今月のAWS利用料が ${threshold} USD を超えました。`)
+    return await slack(
+      format(MESSAGE_FOR_EXCESSIVE_USAGE, threshold.toString())
+    )
   }
 }

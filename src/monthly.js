@@ -1,11 +1,7 @@
-const AWS = require('aws-sdk')
+const { format } = require('util')
 const cw = require('./lib/cw')
 const slack = require('./lib/slack')
-
-const CW = new AWS.CloudWatch({
-  region: 'us-east-1',
-  endpoint: 'https://monitoring.us-east-1.amazonaws.com'
-})
+const { MESSAGE_FOR_MONTHLY_REPORT } = process.env
 
 module.exports.handler = async () => {
   const result = await cw()
@@ -14,5 +10,5 @@ module.exports.handler = async () => {
     data => data.Id === 'billingMetrics'
   ).Values[0]
 
-  slack(`先月のAWS利用料は ${cost} USD でした。`)
+  return await slack(format(MESSAGE_FOR_MONTHLY_REPORT, cost.toPrecision(3)))
 }

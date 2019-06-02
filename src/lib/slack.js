@@ -1,13 +1,19 @@
 const axios = require('axios')
+const {
+  SLACK_INCOMMING_WEBHOOK_URL,
+  SLACK_CHANNEL,
+  SLACK_USERNAME,
+  SLACK_EMOJI
+} = process.env
 
-module.exports = text => {
+module.exports = async text => {
   const slackArg = [
-    process.env.SLACK_INCOMMING_WEBHOOK_URL,
+    SLACK_INCOMMING_WEBHOOK_URL,
     {
-      channel: '#general',
-      username: 'AWS請求bot',
+      channel: SLACK_CHANNEL,
+      username: SLACK_USERNAME,
       text,
-      icon_emoji: ':ghost:'
+      icon_emoji: SLACK_EMOJI
     }
   ]
   try {
