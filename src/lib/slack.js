@@ -1,10 +1,10 @@
-const axios = require('axios')
+const axios = require("axios");
 const {
   SLACK_INCOMMING_WEBHOOK_URL,
   SLACK_CHANNEL,
   SLACK_USERNAME,
   SLACK_EMOJI
-} = process.env
+} = process.env;
 
 module.exports = async text => {
   const slackArg = [
@@ -15,10 +15,11 @@ module.exports = async text => {
       text,
       icon_emoji: SLACK_EMOJI
     }
-  ]
+  ];
+  console.log(slackArg);
   try {
-    await axios.post(...slackArg)
+    await axios.post(...slackArg);
   } catch (error) {
-    console.error({ error, slackArg })
+    console.error({ error, slackArg });
   }
-}
+};
