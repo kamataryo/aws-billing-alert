@@ -7,7 +7,7 @@
   "private": false,
   "devDependencies": {
     "aws-sdk": "^2.449.0",
-    "serverless": "^1.44.1"
+    "serverless": "^1.59.3"
   },
   "peerDependencies": {
     "aws-sdk": "^2"
