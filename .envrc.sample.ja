@@ -1,0 +1,15 @@
+# profile
+export AWS_ACCESS_KEY_ID=xxxx
+export AWS_SECRET_ACCESS_KEY=xxxx
+
+# [required] Slack の webhook URL
+export SLACK_INCOMMING_WEBHOOK_URL=xxxx
+# [required] 一昨日と比較して昨日のコストが以下の値を超えた時にメッセージを送ります
+export COST_REPORT_THREASHOLDS="5,300,1000"
+
+# optional
+export MESSAGE_FOR_EXCESSIVE_USAGE="<!channel> 今月のAWS利用料が %d USD を超えました。"
+export MESSAGE_FOR_MONTHLY_REPORT="<!channel> 先月のAWS利用料は %f USD でした。"
+export SLACK_CHANNEL="#aws-billing"
+export SLACK_EMOJI=":ghost:"
+export SLACK_USERNAME="AWS 請求 bot"

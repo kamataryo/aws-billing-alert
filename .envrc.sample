@@ -8,7 +8,8 @@ export SLACK_INCOMMING_WEBHOOK_URL=xxxx
 export COST_REPORT_THREASHOLDS="5,300,1000"
 
 # optional
-export MESSAGE_FOR_EXCESSIVE_USAGE="The AWS usage fee for this month has exceeded over %s USD."
-export MESSAGE_FOR_MONTHLY_REPORT="The AWS usage fee for last month is %s USD."
+export MESSAGE_FOR_EXCESSIVE_USAGE="<!channel> The AWS usage fee for this month has exceeded over %s USD."
+export MESSAGE_FOR_MONTHLY_REPORT="<!channel> The AWS usage fee for last month is %s USD."
 export SLACK_CHANNEL="#general"
 export SLACK_EMOJI=":ghost:"
+export SLACK_USERNAME="AWS Billing Alert Bot"

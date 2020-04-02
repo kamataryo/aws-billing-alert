@@ -35,8 +35,6 @@ module.exports = () => {
   const now = new Date();
   const year = now.getFullYear();
   const month = now.getMonth();
-  const day = now.getDate();
-  let text = "";
 
   const start = new Date(year, month - 1, 1, 0, 0, 0);
   const end = new Date(year, month, 1, 0, 0, 0);

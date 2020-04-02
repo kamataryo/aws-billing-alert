@@ -16,7 +16,6 @@ module.exports = async text => {
       icon_emoji: SLACK_EMOJI
     }
   ];
-  console.log(slackArg);
   try {
     await axios.post(...slackArg);
   } catch (error) {

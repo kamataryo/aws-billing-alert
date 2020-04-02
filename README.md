@@ -25,3 +25,11 @@ $ npm run deploy
 ## Customization
 
 See `.envrc.sample` and `serverless.yml`.
+
+## Run Locally
+
+### Monthly report
+
+```shell
+$ node ./src/monthly.js --exec
+```
