@@ -1,13 +1,13 @@
 service: aws-biling-alert
 
-frameworkVersion: '>=1.76.1 <2.0.0'
+frameworkVersion: ">=1.76.1 <2.0.0"
 
 provider:
   name: aws
   runtime: nodejs12.x
   memorySize: 192
   timeout: 6
-  region: us-east-1
+  region: ${env:AWS_REGION, "us-east-1"}
   stage: v1
   environment:
     # required
@@ -25,20 +25,20 @@ provider:
       Action:
         - cloudwatch:GetMetricData
       Resource:
-        - '*'
+        - "*"
 
 custom:
   defaultThreasholds:
     Fn::Join:
-      - ','
+      - ","
       - - 5
         - 300
         - 1000
-  defaultMessageForExcessiveUsage: '<!channel> The AWS usage fee for this month has exceeded over %s USD.'
-  defaultMessageForMonthlyReport: '<!channel> The AWS usage fee for last month is %s USD.'
-  defaultSlackChannel: '#general'
-  defaultSlackUsername: 'AWS Billing Bot'
-  defaultSlackEmoji: ':ghost:'
+  defaultMessageForExcessiveUsage: "<!channel> The AWS usage fee for this month has exceeded over %s USD."
+  defaultMessageForMonthlyReport: "<!channel> The AWS usage fee for last month is %s USD."
+  defaultSlackChannel: "#general"
+  defaultSlackUsername: "AWS Billing Bot"
+  defaultSlackEmoji: ":ghost:"
 
 package:
   exclude:

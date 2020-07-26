@@ -8,6 +8,7 @@ export SLACK_INCOMMING_WEBHOOK_URL=xxxx
 export COST_REPORT_THREASHOLDS="5,300,1000"
 
 # optional
+export AWS_REGION=ap-northeast-1
 export MESSAGE_FOR_EXCESSIVE_USAGE="<!channel> 今月のAWS利用料が %d USD を超えました。"
 export MESSAGE_FOR_MONTHLY_REPORT="<!channel> 先月のAWS利用料は %f USD でした。"
 export SLACK_CHANNEL="#aws-billing"

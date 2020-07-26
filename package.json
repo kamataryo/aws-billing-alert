@@ -13,8 +13,8 @@
     "aws-sdk": "^2"
   },
   "scripts": {
-    "deploy": "sls deploy --stage=v1",
-    "remove": "sls remove --stage=v1"
+    "deploy": "sls deploy",
+    "remove": "sls remove"
   },
   "dependencies": {
     "axios": "^0.19.2"
