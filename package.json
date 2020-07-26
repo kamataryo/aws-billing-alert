@@ -7,15 +7,16 @@
   "private": false,
   "devDependencies": {
     "aws-sdk": "^2.449.0",
-    "serverless": "^1.59.3"
+    "serverless": "^1.76.1"
   },
   "peerDependencies": {
     "aws-sdk": "^2"
   },
   "scripts": {
-    "deploy": "sls deploy"
+    "deploy": "sls deploy --stage=dev",
+    "remove": "sls remove --stage=v1"
   },
   "dependencies": {
-    "axios": "^0.19.0"
+    "axios": "^0.19.2"
   }
 }

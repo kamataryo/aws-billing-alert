@@ -14,30 +14,41 @@ const cwParam = (startTime, endTime) => {
             Dimensions: [
               {
                 Name: "Currency",
-                Value: "USD"
-              }
-            ]
+                Value: "USD",
+              },
+            ],
           },
           Period: 86400,
-          Stat: "Average"
-        }
-      }
-    ]
+          Stat: "Average",
+        },
+      },
+    ],
   };
 };
 
 const CW = new AWS.CloudWatch({
   region: "us-east-1",
-  endpoint: "https://monitoring.us-east-1.amazonaws.com"
+  endpoint: "https://monitoring.us-east-1.amazonaws.com",
 });
 
-module.exports = () => {
+module.exports.monthlyReport = () => {
   const now = new Date();
   const year = now.getFullYear();
   const month = now.getMonth();
 
   const start = new Date(year, month - 1, 1, 0, 0, 0);
   const end = new Date(year, month, 1, 0, 0, 0);
+
+  return CW.getMetricData(cwParam(start, end)).promise();
+};
+
+module.exports.dailyReport = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth();
+
+  const start = new Date(year, month, 1, 0, 0, 0);
+  const end = now;
 
   return CW.getMetricData(cwParam(start, end)).promise();
 };

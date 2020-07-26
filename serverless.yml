@@ -1,10 +1,12 @@
 service: aws-biling-alert
 
-frameworkVersion: '>=1.44.1 <2.0.0'
+frameworkVersion: '>=1.76.1 <2.0.0'
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
+  memorySize: 192
+  timeout: 6
   region: us-east-1
   stage: v1
   environment:
