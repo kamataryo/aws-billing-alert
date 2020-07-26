@@ -7,7 +7,7 @@ const { MESSAGE_FOR_EXCESSIVE_USAGE, COST_REPORT_THREASHOLDS } = process.env;
 const [, , exec] = process.argv;
 const localMode = exec === "--exec" || exec === "-e";
 
-module.exports.handler = async () => {
+module.exports.handler = async (event) => {
   const result = await dailyReport();
   const { Values } = result.MetricDataResults.find(
     (data) => data.Id === "billingMetrics"
@@ -16,7 +16,7 @@ module.exports.handler = async () => {
   const [cost1, cost0] = Values;
   const { excessed, threshold } = hasExcessed(cost1, cost0);
 
-  if (localMode) {
+  if (localMode || event.debug) {
     console.log(
       JSON.stringify(
         {
@@ -34,6 +34,9 @@ module.exports.handler = async () => {
     return await slack(
       format(MESSAGE_FOR_EXCESSIVE_USAGE, threshold.toString())
     );
+  } else {
+    console.log("no excessive usage");
+    console.log({ cost1, cost0, COST_REPORT_THREASHOLDS });
   }
 };
 
