@@ -3,7 +3,6 @@ const { monthlyReport } = require("./lib/cw");
 const slack = require("./lib/slack");
 
 const { MESSAGE_FOR_MONTHLY_REPORT } = process.env;
-const [, , exec] = process.argv;
 
 module.exports.handler = async (event) => {
   const result = await monthlyReport();
@@ -19,6 +18,7 @@ module.exports.handler = async (event) => {
   return await slack(format(MESSAGE_FOR_MONTHLY_REPORT, cost.toPrecision(3)));
 };
 
+const [, , exec] = process.argv;
 if (exec === "--exec" || exec === "-e") {
-  module.exports.handler();
+  module.exports.handler({ debug: true });
 }

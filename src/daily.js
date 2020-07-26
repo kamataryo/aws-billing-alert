@@ -4,8 +4,6 @@ const { dailyReport } = require("./lib/cw");
 const slack = require("./lib/slack");
 
 const { MESSAGE_FOR_EXCESSIVE_USAGE, COST_REPORT_THREASHOLDS } = process.env;
-const [, , exec] = process.argv;
-const localMode = exec === "--exec" || exec === "-e";
 
 module.exports.handler = async (event) => {
   const result = await dailyReport();
@@ -16,7 +14,7 @@ module.exports.handler = async (event) => {
   const [cost1, cost0] = Values;
   const { excessed, threshold } = hasExcessed(cost1, cost0);
 
-  if (localMode || event.debug) {
+  if (event.debug) {
     console.log(
       JSON.stringify(
         {
@@ -40,6 +38,7 @@ module.exports.handler = async (event) => {
   }
 };
 
-if (localMode) {
-  module.exports.handler();
+const [, , exec] = process.argv;
+if (exec === "--exec" || exec === "-e") {
+  module.exports.handler({ debug: true });
 }
