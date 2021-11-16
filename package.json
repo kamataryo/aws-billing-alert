@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": false,
   "devDependencies": {
-    "aws-sdk": "^2.449.0",
+    "aws-sdk": "^2.814.0",
     "serverless": "^1.76.1"
   },
   "peerDependencies": {
