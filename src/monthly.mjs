@@ -1,10 +1,10 @@
-const { format } = require("util");
-const { monthlyReport } = require("./lib/cw");
-const slack = require("./lib/slack");
+import { format } from "util";
+import { monthlyReport } from "./lib/cw.mjs";
+import { slack } from "./lib/slack.mjs";
 
 const { MESSAGE_FOR_MONTHLY_REPORT } = process.env;
 
-module.exports.handler = async (event) => {
+export const handler = async (event) => {
   const result = await monthlyReport();
 
   if (event.debug) {
@@ -20,5 +20,5 @@ module.exports.handler = async (event) => {
 
 const [, , exec] = process.argv;
 if (exec === "--exec" || exec === "-e") {
-  module.exports.handler({ debug: true });
+  handler({ debug: true });
 }

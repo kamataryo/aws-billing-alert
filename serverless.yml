@@ -1,31 +1,33 @@
 service: aws-biling-alert
 
-frameworkVersion: ">=1.76.1 <2.0.0"
+frameworkVersion: ">=3 <4"
 
 provider:
   name: aws
-  runtime: nodejs12.x
-  memorySize: 192
+  runtime: nodejs20.x
+  memorySize: 128
   timeout: 6
   region: ${env:AWS_REGION, "us-east-1"}
   stage: v1
   environment:
     # required
-    SLACK_INCOMMING_WEBHOOK_URL: ${env:SLACK_INCOMMING_WEBHOOK_URL}
+    SLACK_INCOMING_WEBHOOK_URL: ${env:SLACK_INCOMING_WEBHOOK_URL}
     # options
-    COST_REPORT_THREASHOLDS: ${env:COST_REPORT_THREASHOLDS, self:custom.defaultThreasholds}
+    COST_REPORT_THRESHOLDS: ${env:COST_REPORT_THRESHOLDS, self:custom.defaultThreasholds}
     MESSAGE_FOR_EXCESSIVE_USAGE: ${env:MESSAGE_FOR_EXCESSIVE_USAGE, self:custom.defaultMessageForExcessiveUsage}
     MESSAGE_FOR_MONTHLY_REPORT: ${env:MESSAGE_FOR_MONTHLY_REPORT, self:custom.defaultMessageForMonthlyReport}
     SLACK_CHANNEL: ${env:SLACK_CHANNEL, self:custom.defaultSlackChannel}
     SLACK_USERNAME: ${env:SLACK_USERNAME, self:custom.defaultSlackUsername}
     SLACK_EMOJI: ${env:SLACK_EMOJI, self:custom.defaultSlackEmoji}
 
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - cloudwatch:GetMetricData
-      Resource:
-        - "*"
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - cloudwatch:GetMetricData
+          Resource:
+            - "*"
 
 custom:
   defaultThreasholds:
@@ -41,18 +43,12 @@ custom:
   defaultSlackEmoji: ":ghost:"
 
 package:
-  exclude:
-    - .circleci/**
-    - .git/**
-    - bin/**
-    - test/**
-    - docs/**
-    - .*
-    - package-lock.json
-    - yarn.lock
-    - package.json
-    - README.md
-    - socials/**
+  patterns:
+    - '!socials/**'
+    - '!README.md'
+    - '!package.json'
+    - '!yarn.lock'
+    - '!package-lock.json'
 
 functions:
   daily:

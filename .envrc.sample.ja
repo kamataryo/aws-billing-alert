@@ -3,9 +3,9 @@ export AWS_ACCESS_KEY_ID=xxxx
 export AWS_SECRET_ACCESS_KEY=xxxx
 
 # [required] Slack の webhook URL
-export SLACK_INCOMMING_WEBHOOK_URL=xxxx
+export SLACK_INCOMING_WEBHOOK_URL=xxxx
 # [required] 一昨日と比較して昨日のコストが以下の値を超えた時にメッセージを送ります
-export COST_REPORT_THREASHOLDS="5,300,1000"
+export COST_REPORT_THRESHOLDS="5,300,1000"
 
 # optional
 export AWS_REGION=ap-northeast-1

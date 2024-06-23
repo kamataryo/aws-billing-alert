@@ -6,17 +6,15 @@
   "license": "MIT",
   "private": false,
   "devDependencies": {
-    "aws-sdk": "^2.449.0",
-    "serverless": "^1.76.1"
+    "@aws-sdk/client-cloudwatch": "^3.600.0",
+    "serverless": "^3"
   },
   "peerDependencies": {
-    "aws-sdk": "^2"
+    "@aws-sdk/client-cloudwatch": "^3.600.0"
   },
   "scripts": {
     "deploy": "sls deploy",
     "remove": "sls remove"
   },
-  "dependencies": {
-    "axios": "^0.19.2"
-  }
+  "dependencies": {}
 }

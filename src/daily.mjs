@@ -1,26 +1,26 @@
-const { format } = require("util");
-const hasExcessed = require("./lib/has-exceeded");
-const { dailyReport } = require("./lib/cw");
-const slack = require("./lib/slack");
+import { format } from "util";
+import { hasExceed } from "./lib/has-exceeded.mjs";
+import { dailyReport } from "./lib/cw.mjs";
+import { slack } from "./lib/slack.mjs";
 
-const { MESSAGE_FOR_EXCESSIVE_USAGE, COST_REPORT_THREASHOLDS } = process.env;
+const { MESSAGE_FOR_EXCESSIVE_USAGE, COST_REPORT_THRESHOLDS } = process.env;
 
-module.exports.handler = async (event) => {
+export const handler = async (event) => {
   const result = await dailyReport();
   const { Values } = result.MetricDataResults.find(
     (data) => data.Id === "billingMetrics"
   );
   // cost values for yesterday and a day before yesterday
   const [cost1, cost0] = Values;
-  const { excessed, threshold } = hasExcessed(cost1, cost0);
+  const { exceed, threshold } = hasExceed(cost1, cost0);
 
   if (event.debug) {
     console.log(
       JSON.stringify(
         {
           cwReport: result,
-          excessed,
-          COST_REPORT_THREASHOLDS,
+          exceed,
+          COST_REPORT_THRESHOLDS,
         },
         null,
         2
@@ -28,17 +28,17 @@ module.exports.handler = async (event) => {
     );
   }
 
-  if (excessed) {
+  if (exceed) {
     return await slack(
       format(MESSAGE_FOR_EXCESSIVE_USAGE, threshold.toString())
     );
   } else {
     console.log("no excessive usage");
-    console.log({ cost1, cost0, COST_REPORT_THREASHOLDS });
+    console.log({ cost1, cost0, COST_REPORT_THRESHOLDS });
   }
 };
 
 const [, , exec] = process.argv;
 if (exec === "--exec" || exec === "-e") {
-  module.exports.handler({ debug: true });
+  handler({ debug: true });
 }

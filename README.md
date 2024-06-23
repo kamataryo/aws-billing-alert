@@ -9,7 +9,6 @@ Also monthly report will be delivered at the end of month.
 ## Prerequisite
 
 - Enable `Cost Explorer` for the targeted AWS account
-- (recommended) Install `direnv` to inject environmental variables
 
 ## Deploy
 
@@ -19,6 +18,7 @@ $ cd aws-billing-alert
 $ yarn # or npm install
 $ cp .envrc.sample .envrc # Please fill the values
 $ vi .envrc
+$ souce .envrc
 $ npm run deploy
 ```
 
@@ -29,6 +29,6 @@ See `.envrc.sample` and `serverless.yml`.
 ## Run Locally
 
 ```shell
-$ node ./src/monthly.js --exec
-$ node ./src/daily.js --exec
+$ node ./src/monthly.mjs --exec
+$ node ./src/daily.mjs --exec
 ```
