@@ -11,6 +11,7 @@ export COST_REPORT_THRESHOLDS="5,300,1000"
 export AWS_REGION=ap-northeast-1
 export MESSAGE_FOR_EXCESSIVE_USAGE="<!channel> 今月のAWS利用料が %d USD を超えました。"
 export MESSAGE_FOR_MONTHLY_REPORT="<!channel> 先月のAWS利用料は %f USD でした。"
+export MESSAGE_NO_COST_DATA="!<channel> 先月のAWS利用料のデータが見つかりませんでした"
 export SLACK_CHANNEL="#aws-billing"
 export SLACK_EMOJI=":ghost:"
 export SLACK_USERNAME="AWS 請求 bot"

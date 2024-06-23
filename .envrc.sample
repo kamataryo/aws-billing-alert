@@ -11,6 +11,7 @@ export COST_REPORT_THRESHOLDS="5,300,1000"
 export AWS_REGION=us-east-1
 export MESSAGE_FOR_EXCESSIVE_USAGE="<!channel> The AWS usage fee for this month has exceeded over %s USD."
 export MESSAGE_FOR_MONTHLY_REPORT="<!channel> The AWS usage fee for last month is %s USD."
+export MESSAGE_NO_COST_DATA="!<channel> No AWS cost data for last month available"
 export SLACK_CHANNEL="#general"
 export SLACK_EMOJI=":ghost:"
 export SLACK_USERNAME="AWS Billing Alert Bot"

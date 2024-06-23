@@ -16,6 +16,7 @@ provider:
     COST_REPORT_THRESHOLDS: ${env:COST_REPORT_THRESHOLDS, self:custom.defaultThreasholds}
     MESSAGE_FOR_EXCESSIVE_USAGE: ${env:MESSAGE_FOR_EXCESSIVE_USAGE, self:custom.defaultMessageForExcessiveUsage}
     MESSAGE_FOR_MONTHLY_REPORT: ${env:MESSAGE_FOR_MONTHLY_REPORT, self:custom.defaultMessageForMonthlyReport}
+    MESSAGE_NO_COST_DATA: ${env:MESSAGE_NO_COST_DATA, self:custom.defaultMessageNoCostData}
     SLACK_CHANNEL: ${env:SLACK_CHANNEL, self:custom.defaultSlackChannel}
     SLACK_USERNAME: ${env:SLACK_USERNAME, self:custom.defaultSlackUsername}
     SLACK_EMOJI: ${env:SLACK_EMOJI, self:custom.defaultSlackEmoji}
@@ -38,6 +39,7 @@ custom:
         - 1000
   defaultMessageForExcessiveUsage: "<!channel> The AWS usage fee for this month has exceeded over %s USD."
   defaultMessageForMonthlyReport: "<!channel> The AWS usage fee for last month is %s USD."
+  defaultMessageNoCostData: "<!channel> There is no cost data for this month."
   defaultSlackChannel: "#general"
   defaultSlackUsername: "AWS Billing Bot"
   defaultSlackEmoji: ":ghost:"
