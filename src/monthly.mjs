@@ -1,19 +1,21 @@
 import { format } from "util";
-import { monthlyReport } from "./lib/cw.mjs";
+import { monthlyReport } from "./lib/ce.mjs";
 import { slack } from "./lib/slack.mjs";
 
 const { MESSAGE_FOR_MONTHLY_REPORT, MESSAGE_NO_COST_DATA } = process.env;
 
 export const handler = async (event) => {
   const result = await monthlyReport();
-
-  if (event.debug) {
-    console.log(JSON.stringify({ cwReport: result }, null, 2));
+  let cost = undefined
+  try {
+    cost = parseFloat(result.ResultsByTime[0].Total.BlendedCost.Amount);
+  } catch (error) {
+    console.log(error)
   }
 
-  const cost = result.MetricDataResults.find(
-    (data) => data.Id === "billingMetrics"
-  ).Values[0];
+  if (event.debug) {
+    console.log(JSON.stringify({ result }, null, 2));
+  }
 
   if(!cost) {
     return await slack(MESSAGE_NO_COST_DATA)
