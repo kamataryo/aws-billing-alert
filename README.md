@@ -18,7 +18,7 @@ $ cd aws-billing-alert
 $ yarn # or npm install
 $ cp .envrc.sample .envrc # Please fill the values
 $ vi .envrc
-$ souce .envrc
+$ source .envrc
 $ npm run deploy
 ```
 
