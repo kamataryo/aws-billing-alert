@@ -8,7 +8,8 @@ Also monthly report will be delivered at the end of month.
 
 ## Prerequisite
 
-- Enable `Cost Explorer` for the targeted AWS account
+- Enable `Cost Explorer` for the targeted AWS account  
+  https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html#turning_on_billing_metrics
 
 ## Deploy
 
