@@ -61,4 +61,4 @@ functions:
   monthly:
     handler: src/monthly.handler
     events:
-      - schedule: cron(0 4 2 * ? *)
+      - schedule: cron(0 4 1 * ? *)
