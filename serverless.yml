@@ -8,6 +8,7 @@ provider:
   memorySize: 128
   timeout: 6
   region: ${env:AWS_REGION, "us-east-1"}
+  logRetentionInDays: 7
   stage: v1
   environment:
     # required
